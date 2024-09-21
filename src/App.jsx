@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
-import DogCatalog from './components/Catalog';
-import DogDetails from './components/DogDetails';
+import Home from './components/Home.jsx';
+import Catalog from './components/Catalog.jsx';
+import DogDetails from './components/DogDetails.jsx';
 
 function App() {
   return (
