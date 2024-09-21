@@ -8,8 +8,8 @@
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 1000;
-    box-sizing: border-box; /* Viktigt för att padding inte påverkar totalbredden */
+    z-index: 1000; /* Se till att navbaren ligger över allt annat */
+    box-sizing: border-box; /* För att padding inte ska påverka bredden */
   }
   
   .navbar-title {
@@ -21,7 +21,7 @@
   .navbar-links {
     list-style: none;
     display: flex;
-    gap: 20px; /* Mellanrum mellan länkar */
+    gap: 20px; /* Mellanrum mellan länkarna */
     margin: 0;
     padding: 0;
   }
@@ -34,8 +34,8 @@
   .navbar-links li a {
     text-decoration: none;
     color: #fff;
-    padding: 10px; /* Extra padding för bättre klickyta */
-    white-space: nowrap; /* Förhindra att text bryts på små skärmar */
+    padding: 10px; /* Extra padding för större klickytor */
+    white-space: nowrap; /* Förhindrar att texten bryts på små skärmar */
   }
   
   .navbar-links li a:hover {
@@ -49,7 +49,7 @@
     }
   
     .navbar-links {
-      gap: 10px; /* Mindre mellanrum för att få plats på mindre skärmar */
+      gap: 10px; /* Mindre mellanrum mellan länkarna på mindre skärmar */
     }
   
     .navbar-links li {
@@ -63,5 +63,12 @@
     }
   
     .navbar-links {
-      flex-direction: column; /* Lägg länkarna på
+      flex-direction: column; /* Lägg länkarna vertikalt på små skärmar */
+      align-items: center;
+      gap: 15px; /* Mellanrum mellan länkarna vertikalt */
+    }
   
+    .navbar-links li {
+      font-size: 1rem;
+    }
+  }
