@@ -1,0 +1,67 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #00aaff;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box; /* Viktigt för att padding inte påverkar totalbredden */
+  }
+  
+  .navbar-title {
+    font-family: 'Lobster', cursive;
+    font-size: 2rem;
+    color: #fff;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px; /* Mellanrum mellan länkar */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-links li {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+  }
+  
+  .navbar-links li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px; /* Extra padding för bättre klickyta */
+    white-space: nowrap; /* Förhindra att text bryts på små skärmar */
+  }
+  
+  .navbar-links li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Gör navbaren responsiv för mindre skärmar */
+  @media (max-width: 768px) {
+    .navbar-title {
+      font-size: 1.5rem;
+    }
+  
+    .navbar-links {
+      gap: 10px; /* Mindre mellanrum för att få plats på mindre skärmar */
+    }
+  
+    .navbar-links li {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .navbar-title {
+      font-size: 1.2rem;
+    }
+  
+    .navbar-links {
+      flex-direction: column; /* Lägg länkarna på
+  
