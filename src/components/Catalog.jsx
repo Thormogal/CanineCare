@@ -91,7 +91,7 @@ function Catalog() {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  const dogPlaceholder = '/images/DogPlaceholder.webp';
+  const dogPlaceholder = '/CanineCare/images/DogPlaceholder.webp';
 
   return (
     <div className="catalog-container">
