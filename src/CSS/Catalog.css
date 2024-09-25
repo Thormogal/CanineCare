@@ -95,6 +95,20 @@ label {
     transition: transform 0.2s ease-in-out;
 }
 
+@media (prefers-color-scheme: light) {
+    .dog-card {
+        background-color: rgb(159, 159, 159);
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 200px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+
+}
+
 .dog-card:hover {
     transform: scale(1.05);
     transition: transform 0.2s ease-in-out;

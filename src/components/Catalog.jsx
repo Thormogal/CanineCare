@@ -77,13 +77,22 @@ function Catalog() {
   };
 
   const filterDogs = (search, filters) => {
-    const filtered = dogs.filter(dog =>
-      dog.name.toLowerCase().includes(search.toLowerCase()) &&
-      (filters.breed ? dog.breed.toLowerCase().includes(filters.breed.toLowerCase()) : true) &&
-      (filters.age ? dog.age === Number(filters.age) : true) &&
-      (filters.size ? dog.size === filters.size : true) &&
-      (filters.present ? dog.present === filters.present : true)
-    );
+    const filtered = dogs.filter(dog => {
+      const searchTerm = search.toLowerCase();
+  
+      const matchesSearch =
+        dog.name.toLowerCase().includes(searchTerm) ||
+        dog.breed.toLowerCase().includes(searchTerm) ||
+        (dog.age && dog.age.toString() === searchTerm);
+  
+      return (
+        matchesSearch &&
+        (filters.breed ? dog.breed.toLowerCase().includes(filters.breed.toLowerCase()) : true) &&
+        (filters.age ? dog.age === Number(filters.age) : true) &&
+        (filters.size ? dog.size === filters.size : true) &&
+        (filters.present ? dog.present === filters.present : true)
+      );
+    });
     setFilteredDogs(filtered);
   };
 
@@ -132,6 +141,7 @@ function Catalog() {
         <div className="select-wrapper">
           <select name="size" value={filter.size} onChange={handleFilterChange}>
             <option value="">All Sizes</option>
+            <option value="Rat">Rat</option>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
