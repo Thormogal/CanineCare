@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { API_KEY } from '../config/config.js';
+import '../CSS/Catalog.css';
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function Catalog() {
     const [dogs, setDogs] = useState([]);
@@ -7,58 +13,62 @@ function Catalog() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-      console.log(import.meta.env);
-      console.log(import.meta.env.VITE_APP_JSONBIN_KEY);
-        fetch('https://api.jsonbin.io/v3/b/66ef402ae41b4d34e434958e', {
-            headers: {
-                'X-Master-Key': API_KEY,
-              },
+      fetch('https://api.jsonbin.io/v3/b/66ef402ae41b4d34e434958e', {
+          headers: {
+              'X-Master-Key': API_KEY,
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
             })
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-              })
-              .then((data) => {
-                console.log(data.record);
-                setDogs(data.record);
-                setLoading(false);
-              })
-              .catch((err) => {
-                setError(err.message);
-                setLoading(false);
-              });
-          }, []);
-        
-          if (loading) {
-            return <p>Loading...</p>;
-          }
-        
-          if (error) {
-            return <p>Error: {error}</p>;
-          }
-        
-          return (
-            <div>
-              <h1>Dog Catalog</h1>
-              <div className="dog-list">
-                {dogs.map((dog) => (
-                  <div key={dog.chipNumber} className="dog-card">
-                    <img src={dog.img} alt={dog.breed} className="dog-image" />
-                    <h2>{dog.name}</h2>
-                    <p><strong>Breed:</strong> {dog.breed}</p>
-                    <p><strong>Age:</strong> {dog.age}</p>
-                    <p><strong>Sex:</strong> {dog.sex}</p>
-                    <p><strong>Present:</strong> {dog.present ? "Yes" : "No"}</p>
-                    <h3>Owner Information</h3>
-                    <p><strong>Name:</strong> {dog.owner.name} {dog.owner.lastName}</p>
-                    <p><strong>Phone:</strong> {dog.owner.phoneNumber}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
+            .then((data) => {
+              setDogs(data.record);
+              setLoading(false);
+            })
+            .catch((err) => {
+              setError(err.message);
+              setLoading(false);
+            });
+        }, []);
+      
+        if (loading) {
+          return <p>Loading...</p>;
         }
-        
-        export default Catalog;
+      
+        if (error) {
+          return <p>Error: {error}</p>;
+        }
+
+        const placeholderImage = '/images/DogPlaceholder.webp'
+      
+        return (
+          <div className="catalog-container">
+            <div className="dog-list">
+              {dogs.map((dog) => (
+                <Link to={`/dog/${dog.chipNumber}`} className="dog-link" key={dog.chipNumber}>
+                  <div className="dog-card">
+                    <h2>{dog.name}</h2>
+                    <img 
+                      src={dog.img} 
+                      alt={dog.breed} 
+                      className="dog-image"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = placeholderImage;
+                        e.target.style.opacity = "0.3";
+                      }}
+                    />
+                    <p><strong>{capitalizeFirstLetter(dog.breed)}</strong></p>
+                    <p>Age: {dog.age}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+export default Catalog;
