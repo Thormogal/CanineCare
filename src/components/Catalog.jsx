@@ -38,9 +38,6 @@ function Catalog() {
       .catch((err) => console.error(err.message));
   }, []);
 
-  const placeholderImage = '/CanineCare/images/DogPlaceholder.webp';
-
-
   const extractFilters = (data) => {
     const breedSet = new Set();
     const ageSet = new Set();
@@ -93,6 +90,8 @@ function Catalog() {
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
+  const dogPlaceholder = '/CanineCare/DogPlaceholder.webp';
 
   return (
     <div className="catalog-container">
@@ -161,7 +160,7 @@ function Catalog() {
                 className="dog-image"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = placeholderImage;
+                  e.target.src = dogPlaceholder;
                   e.target.style.opacity = "0.3";
                 }}
               />
