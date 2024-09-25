@@ -8,10 +8,10 @@ import Navbar from './components/Navbar.jsx';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/CanineCare">
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/CanineCare" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/aboutUs" element={<AboutUs />} />

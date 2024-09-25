@@ -1,7 +1,7 @@
 {
   "name": "caninecare",
   "version": "0.0.0",
-  "homepage": "https://Thormogal.github.io/caninecare",
+  "homepage": "https://Thormogal.github.io/CanineCare",
   "type": "module",
   "scripts": {
     "dev": "vite",
