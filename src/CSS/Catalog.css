@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Förhindrar horisontell scroll */
+    overflow-x: hidden;
   }
 
 .catalog-container {
@@ -37,12 +37,10 @@ html, body {
 select {
     padding: 10px;
     padding-right: 40px;
-    /* Utrymme för ikonen */
     font-size: 1rem;
     border-radius: 5px;
     border: 1px solid #ccc;
     appearance: none;
-    /* Ta bort standardpilen */
     background: transparent;
     cursor: pointer;
 }
@@ -140,7 +138,6 @@ label {
     font-weight: bold;
 }
 
-/* Responsiv anpassning för mindre skärmar */
 @media (max-width: 768px) {
     .filter-container {
         gap: 10px;

@@ -12,7 +12,7 @@ function Catalog() {
     age: '',
     size: ''
   });
-  const [presentFilter, setPresentFilter] = useState(false); // Separat state för "present"
+  const [presentFilter, setPresentFilter] = useState(false);
   const [breeds, setBreeds] = useState([]);
   const [ages, setAges] = useState([]);
   const [sizes, setSizes] = useState([]);
@@ -30,18 +30,17 @@ function Catalog() {
         return response.json();
       })
       .then((data) => {
-        // Sortera hundarna i omvänd alfabetisk ordning (höger till vänster)
         const sortedDogs = data.record.sort((a, b) => a.name.localeCompare(b.name));
         setDogs(sortedDogs);
-        setFilteredDogs(sortedDogs); // Spara också de sorterade hundarna i filteredDogs
-        extractFilters(sortedDogs);  // Extrahera filter från sorterad lista
+        setFilteredDogs(sortedDogs);
+        extractFilters(sortedDogs);
       })
       .catch((err) => console.error(err.message));
   }, []);
 
   const placeholderImage = '/images/DogPlaceholder.webp';
 
-  // Funktion för att extrahera unika värden för ras, ålder och storlek från API:t
+
   const extractFilters = (data) => {
     const breedSet = new Set();
     const ageSet = new Set();
@@ -53,9 +52,9 @@ function Catalog() {
       sizeSet.add(dog.size);
     });
 
-    setBreeds([...breedSet].sort()); // Sortera raserna alfabetiskt
-    setAges([...ageSet].sort((a, b) => a - b)); // Sortera åldrarna numeriskt
-    setSizes([...sizeSet]); // Behåll unika storlekar
+    setBreeds([...breedSet].sort());
+    setAges([...ageSet].sort((a, b) => a - b)); 
+    setSizes([...sizeSet]);
   };
 
   const handleSearch = (e) => {
@@ -77,7 +76,7 @@ function Catalog() {
   const handlePresentChange = (e) => {
     const checked = e.target.checked;
     setPresentFilter(checked);
-    filterDogs(searchTerm, filter, checked); // Uppdaterar bara "present"-filtret separat
+    filterDogs(searchTerm, filter, checked);
   };
 
   const filterDogs = (search, filters) => {
@@ -86,7 +85,7 @@ function Catalog() {
       (filters.breed ? dog.breed.toLowerCase().includes(filters.breed.toLowerCase()) : true) &&
       (filters.age ? dog.age === Number(filters.age) : true) &&
       (filters.size ? dog.size === filters.size : true) &&
-      (filters.present ? dog.present === filters.present : true) // Lägg till present-filtret
+      (filters.present ? dog.present === filters.present : true)
     );
     setFilteredDogs(filtered);
   };
