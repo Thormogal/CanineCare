@@ -38,7 +38,7 @@ function Catalog() {
       .catch((err) => console.error(err.message));
   }, []);
 
-  const placeholderImage = 'CanineCare/images/DogPlaceholder.webp';
+  const placeholderImage = '/images/DogPlaceholder.webp';
 
 
   const extractFilters = (data) => {
