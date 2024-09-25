@@ -1,8 +1,14 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Catalog from './components/Catalog';
+import Contact from './components/Contact';
+import AboutUs from './components/AboutUs';
+import DogDetails from './components/DogDetails';
 
 function App() {
   return (
-    <Router basename="/CanineCare">
+    <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
