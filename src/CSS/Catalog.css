@@ -85,13 +85,13 @@ label {
     text-decoration: none;
     display: inline-block;
     width: 100%;
-    color: #333; /* Förhindrar länkstilen */
+    color: #333;
 }
 
 .dog-card-link:visited,
 .dog-card-link:hover,
 .dog-card-link:active {
-    color: #333; /* För att bevara grå färg vid olika tillstånd */
+    color: #333;
 }
 
 .dog-card-link:hover .dog-card {

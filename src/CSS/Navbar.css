@@ -18,12 +18,14 @@
   align-items: center;
   position: fixed;
   width: 100%;
+  max-width: 100vw;
   top: 0;
   left: 0;
   z-index: 1000;
   box-sizing: border-box;
   background-color: transparent;
 }
+
 
 .navbar-title {
   font-family: 'Lobster', cursive;
