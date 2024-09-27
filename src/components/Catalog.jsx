@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { API_KEY } from '../config/config.js';
 import '../CSS/Catalog.css';
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function Catalog() {
   const [dogs, setDogs] = useState([]);
   const [filteredDogs, setFilteredDogs] = useState([]);
@@ -10,9 +14,9 @@ function Catalog() {
   const [filter, setFilter] = useState({
     breed: '',
     age: '',
-    size: ''
+    size: '',
+    present: false,
   });
-  const [presentFilter, setPresentFilter] = useState(false);
   const [breeds, setBreeds] = useState([]);
   const [ages, setAges] = useState([]);
   const [sizes, setSizes] = useState([]);
@@ -50,41 +54,36 @@ function Catalog() {
     });
 
     setBreeds([...breedSet].sort());
-    setAges([...ageSet].sort((a, b) => a - b)); 
+    setAges([...ageSet].sort((a, b) => a - b));
     setSizes([...sizeSet]);
   };
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-    filterDogs(e.target.value, filter, presentFilter);
+    filterDogs(e.target.value, filter);
   };
 
   const handleFilterChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
 
-    setFilter(prevFilter => ({
-      ...prevFilter,
-      [name]: newValue
-    }));
-    filterDogs(searchTerm, { ...filter, [name]: newValue });
-  };
-
-  const handlePresentChange = (e) => {
-    const checked = e.target.checked;
-    setPresentFilter(checked);
-    filterDogs(searchTerm, filter, checked);
+    const updatedFilter = {
+      ...filter,
+      [name]: newValue,
+    };
+    setFilter(updatedFilter);
+    filterDogs(searchTerm, updatedFilter); // Uppdaterar filtreringen direkt med uppdaterat filter
   };
 
   const filterDogs = (search, filters) => {
     const filtered = dogs.filter(dog => {
       const searchTerm = search.toLowerCase();
-  
+
       const matchesSearch =
         dog.name.toLowerCase().includes(searchTerm) ||
         dog.breed.toLowerCase().includes(searchTerm) ||
         (dog.age && dog.age.toString() === searchTerm);
-  
+
       return (
         matchesSearch &&
         (filters.breed ? dog.breed.toLowerCase().includes(filters.breed.toLowerCase()) : true) &&
@@ -95,10 +94,6 @@ function Catalog() {
     });
     setFilteredDogs(filtered);
   };
-
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
 
   const dogPlaceholder = '/CanineCare/images/DogPlaceholder.webp';
 
@@ -161,8 +156,8 @@ function Catalog() {
       </div>
       <div className="dog-list">
         {filteredDogs.map((dog) => (
-          <div key={dog.chipNumber} className="dog-card">
-            <Link to={`/dog/${dog.chipNumber}`} className="dog-link">
+          <Link to={`/dog/${dog.chipNumber}`} key={dog.chipNumber} className="dog-card-link">
+            <div className="dog-card">
               <h2>{dog.name}</h2>
               <img
                 src={dog.img}
@@ -177,8 +172,8 @@ function Catalog() {
               <p className="dog-breed"><strong>{capitalizeFirstLetter(dog.breed)}</strong></p>
               <p className="dog-info"><span className="label">Age:</span> {dog.age}</p>
               <p className="dog-info"><span className="label">Size:</span> {dog.size}</p>
-            </Link>
-          </div>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
