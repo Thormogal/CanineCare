@@ -72,7 +72,7 @@ function Catalog() {
       [name]: newValue,
     };
     setFilter(updatedFilter);
-    filterDogs(searchTerm, updatedFilter); // Uppdaterar filtreringen direkt med uppdaterat filter
+    filterDogs(searchTerm, updatedFilter);
   };
 
   const filterDogs = (search, filters) => {
